@@ -41,11 +41,23 @@ app
       .catch((err) => res.send(err));
   });
 
-app.route("/articles/:articleTitle").get(function (req, res) {
-  Article.findOne({ title: req.params.articleTitle })
-    .then((data) => res.send(data))
-    .catch((err) => res.send(err));
-});
+app
+  .route("/articles/:articleTitle")
+  .get(function (req, res) {
+    Article.findOne({ title: req.params.articleTitle })
+      .then((data) => res.send(data))
+      .catch((err) => res.send(err));
+  })
+  .put(function (req, res) {
+    console.log(req.params.articleTitle);
+    const updateArticle = {
+      title: req.body.title,
+      content: req.body.content,
+    };
+    Article.updateOne({ title: req.params.articleTitle }, updateArticle)
+      .then(() => res.send("Successfully update article"))
+      .catch((err) => res.send(err));
+  });
 
 app.listen(3000, function () {
   console.log("Server started on port 3000");
