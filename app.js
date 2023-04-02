@@ -41,6 +41,12 @@ app
       .catch((err) => res.send(err));
   });
 
+app.route("/articles/:articleTitle").get(function (req, res) {
+  Article.findOne({ title: req.params.articleTitle })
+    .then((data) => res.send(data))
+    .catch((err) => res.send(err));
+});
+
 app.listen(3000, function () {
   console.log("Server started on port 3000");
 });
