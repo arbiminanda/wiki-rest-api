@@ -23,7 +23,7 @@ npm install
 - Run this command to run the server:
 
 ```
-nodemon app.js
+nodemon server.js
 ```
 
 # API Collections
