@@ -19,27 +19,27 @@ const articleSchema = mongoose.Schema({
 });
 const Article = mongoose.model("Article", articleSchema);
 
-app.get("/articles", function (req, res) {
-  Article.find()
-    .then((data) => res.send(data))
-    .catch((err) => res.send(err));
-});
-
-app.post("/articles", function (req, res) {
-  const newArticle = {
-    title: req.body.title,
-    content: req.body.content,
-  };
-  Article.create(newArticle)
-    .then(() => res.send("Successfully add new article"))
-    .catch((err) => res.send(err));
-});
-
-app.delete("/articles", function (req, res) {
-  Article.deleteMany()
-    .then(() => res.send("Successfully delete all articles"))
-    .catch((err) => res.send(err));
-});
+app
+  .route("/articles")
+  .get(function (req, res) {
+    Article.find()
+      .then((data) => res.send(data))
+      .catch((err) => res.send(err));
+  })
+  .post(function (req, res) {
+    const newArticle = {
+      title: req.body.title,
+      content: req.body.content,
+    };
+    Article.create(newArticle)
+      .then(() => res.send("Successfully add new article"))
+      .catch((err) => res.send(err));
+  })
+  .delete(function (req, res) {
+    Article.deleteMany()
+      .then(() => res.send("Successfully delete all articles"))
+      .catch((err) => res.send(err));
+  });
 
 app.listen(3000, function () {
   console.log("Server started on port 3000");
