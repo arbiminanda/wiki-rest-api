@@ -49,13 +49,17 @@ app
       .catch((err) => res.send(err));
   })
   .put(function (req, res) {
-    console.log(req.params.articleTitle);
     const updateArticle = {
       title: req.body.title,
       content: req.body.content,
     };
     Article.updateOne({ title: req.params.articleTitle }, updateArticle)
       .then(() => res.send("Successfully update article"))
+      .catch((err) => res.send(err));
+  })
+  .patch(function (req, res) {
+    Article.updateOne({ title: req.params.articleTitle }, { $set: req.body })
+      .then(() => res.send("Successfully update article partially"))
       .catch((err) => res.send(err));
   });
 
