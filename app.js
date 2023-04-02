@@ -61,6 +61,11 @@ app
     Article.updateOne({ title: req.params.articleTitle }, { $set: req.body })
       .then(() => res.send("Successfully update article partially"))
       .catch((err) => res.send(err));
+  })
+  .delete(function (req, res) {
+    Article.deleteOne({ title: req.params.articleTitle })
+      .then((data) => res.send(data))
+      .catch((err) => res.send(err));
   });
 
 app.listen(3000, function () {
