@@ -7,17 +7,23 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("view engine", ejs);
+app.set("view engine", ejs);
 app.use(express.static("public"));
 
 mongoose.connect("mongodb://localhost:27017/express", {
   useNewUrlParser: true,
 });
-const articleSchema = {
+const articleSchema = mongoose.Schema({
   title: String,
   content: String,
-};
+});
 const Article = mongoose.model("Article", articleSchema);
+
+app.get("/articles", function (req, res) {
+  Article.find()
+    .then((data) => res.send(data))
+    .catch((err) => res.send(err));
+});
 
 app.listen(3000, function () {
   console.log("Server started on port 3000");
