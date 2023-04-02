@@ -1,5 +1,5 @@
 {
-  "name": "rest-api-express",
+  "name": "simple-wiki-rest-api",
   "version": "1.0.0",
   "description": "Rest API using Express",
   "main": "app.js",
