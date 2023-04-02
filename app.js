@@ -2,13 +2,20 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const app = express();
+
+const corsOptions = {
+  origin: "*",
+};
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set("view engine", ejs);
 app.use(express.static("public"));
+
+app.use(cors(corsOptions));
 
 mongoose.connect("mongodb://localhost:27017/express", {
   useNewUrlParser: true,
