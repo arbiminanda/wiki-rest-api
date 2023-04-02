@@ -26,23 +26,18 @@ app.get("/articles", function (req, res) {
 });
 
 app.post("/articles", function (req, res) {
-  // const newArticle = new Article({
-  //   title: req.body.title,
-  //   content: req.body.content,
-  // });
-  // newArticle.save(function (err) {
-  //   if (!err) {
-  //     res.send("Successfully add new article");
-  //   } else {
-  //     res.send(err);
-  //   }
-  // });
   const newArticle = {
     title: req.body.title,
     content: req.body.content,
   };
   Article.create(newArticle)
     .then(() => res.send("Successfully add new article"))
+    .catch((err) => res.send(err));
+});
+
+app.delete("/articles", function (req, res) {
+  Article.deleteMany()
+    .then(() => res.send("Successfully delete all articles"))
     .catch((err) => res.send(err));
 });
 
